@@ -598,9 +598,9 @@
         id: 'ui', title: 'UI', color: '#C4F24C', fg: '#17151F', meta: 'Apps, websites and game interfaces',
         lede: 'Interfaces for screens of different sizes and moods.',
         projects: [
-          {title: 'Mobile music app', summary: 'A music app for phones.', ratio: '9/19', min: 150, n: 5, images: []},
+          {title: 'Mobile music app', summary: 'A music app for phones.', ratio: '9/19', min: 150, n: 6, images: ['Assets/UI/Welcome.png','Assets/UI/Home.png','Assets/UI/Search Page.png','Assets/UI/Music.png','Assets/UI/Playlists.png','Assets/UI/Profile.png']},
           {title: 'Event website', summary: 'A website for an event.', ratio: '16/10', min: 300, n: 4, images: []},
-          {title: 'Game UI', summary: 'Interface design for a game.', ratio: '16/9', min: 300, n: 4, images: []}
+          {title: 'Game UI', summary: 'Interface design for a game.', natural: true, ratio: '16/9', min: 300, n: 4, images: ['Assets/UI/Programming UI.png','Assets/UI/Audio UI.png','Assets/UI/Lights UI.png','Assets/UI/Art UI.png']}
         ]
       },
       {
@@ -624,8 +624,7 @@
     });
     function isVid(s) {return /^data:video|\.(mp4|webm)(\?|$)|^blob:.*#v$/i.test(s)}
     function tile(src, alt, nat) {
-      if (nat && !isVid(src)) return '<figure class="t nat"><img src="' + esc(src) + '" alt="' + esc(alt) + '"></figure>';
-      if (isVid(src)) return '<figure class="t' + (nat ? ' nat' : '') + '"><video src="' + esc(src) + '" muted loop playsinline ' + (calm ? 'controls' : 'autoplay') + ' aria-label="' + esc(alt) + '"></video></figure>';
+if (nat && !isVid(src)) return '<figure class="t nat"><button class="zoom" type="button" data-src="' + esc(src) + '" data-alt="' + esc(alt) + '" aria-label="Enlarge: ' + esc(alt) + '"><img src="' + esc(src) + '" alt="' + esc(alt) + '"></button></figure>';      if (isVid(src)) return '<figure class="t' + (nat ? ' nat' : '') + '"><video src="' + esc(src) + '" muted loop playsinline ' + (calm ? 'controls' : 'autoplay') + ' aria-label="' + esc(alt) + '"></video></figure>';
       return '<figure class="t"><button class="zoom" type="button" data-src="' + esc(src) + '" data-alt="' + esc(alt) + '" aria-label="Enlarge: ' + esc(alt) + '"><img src="' + esc(src) + '" alt="' + esc(alt) + '"></button></figure>';
     }
     function group(g, p) {
