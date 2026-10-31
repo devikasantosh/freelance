@@ -1,192 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Design portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#EEEDF6;--panel:#fff;--fg:#17151F;--mut:#5F5C6E;--line:rgba(23,21,31,.14);--tile:#E4E2F0;
---display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;--body:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
-color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#100E17;--panel:#1B1826;--fg:#EEEDF6;--mut:#A29FB4;--line:rgba(238,237,246,.16);--tile:#2A2638;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#100E17;--panel:#1B1826;--fg:#EEEDF6;--mut:#A29FB4;--line:rgba(238,237,246,.16);--tile:#2A2638;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.55 var(--body)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
-.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(1rem,3.5vw,2.5rem)}
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem 1.5rem;padding:1rem 0}
-.logo{font:800 1.25rem var(--display);letter-spacing:-.03em;text-decoration:none}
-.pills{display:flex;flex-wrap:wrap;gap:.4rem}
-.pills a{text-decoration:none;font-weight:600;font-size:.95rem;padding:.4rem .95rem;border:1px solid var(--line);border-radius:999px;background:var(--panel);transition:background .2s,color .2s}
-.pills a:hover{background:var(--fg);color:var(--bg)}
-.pills a[aria-current]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-h1,h2,h3,.name{font-family:var(--display);font-weight:800;letter-spacing:-.035em;margin:0}
-.hero{font-size:clamp(2.5rem,7.5vw,6rem);line-height:.98;max-width:15ch;margin:clamp(2rem,6vw,4.5rem) 0 clamp(2rem,5vw,3.5rem)}
-.hero span{color:var(--mut)}
-.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(.75rem,2vw,1.25rem)}
-.card{grid-column:span 6;position:relative;display:flex;flex-direction:column;gap:1.25rem;min-height:360px;padding:clamp(1.25rem,3vw,2rem);border-radius:32px;background:var(--sec);color:var(--secfg);text-decoration:none;transition:transform .25s}
-.card:nth-child(1),.card:nth-child(4){grid-column:span 7}.card:nth-child(2),.card:nth-child(3){grid-column:span 5}
-.card:hover{transform:translateY(-5px)}
-.card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
-.card .name{font-size:clamp(2.2rem,5vw,3.6rem);line-height:.95}
-.go{flex:none;width:3rem;height:3rem;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;transition:transform .25s,background .2s,color .2s}
-.card:hover .go,.card:focus-visible .go{transform:rotate(45deg);background:var(--secfg);color:var(--sec)}
-.card p{margin:0;max-width:34ch;opacity:.85}
-.chips{display:flex;flex-wrap:wrap;gap:.4rem}
-.chips span{font-size:.9rem;font-weight:600;padding:.25rem .75rem;border-radius:999px;border:1.5px solid currentColor}
-.prev{display:flex;gap:.6rem;margin-top:auto}
-.prev>*{flex:1;aspect-ratio:1/1;max-width:110px;border-radius:18px;overflow:hidden;background:color-mix(in srgb,currentColor 18%,transparent)}
-.prev>:nth-child(2){border-radius:999px}.prev>:nth-child(3){border-radius:18px 18px 999px 18px}
-.prev img{width:100%;height:100%;object-fit:cover;display:block}
-@media (max-width:820px){.card,.card:nth-child(n){grid-column:span 12;min-height:300px}}
-.banner{background:var(--sec);color:var(--secfg);border-radius:36px;padding:clamp(1.5rem,5vw,3.5rem);margin:.5rem 0 1.25rem}
-.banner h1{font-size:clamp(3rem,11vw,8.5rem);line-height:.9}
-.banner p{font-size:clamp(1.05rem,2vw,1.35rem);max-width:46ch;margin:1.25rem 0 0}
-.proj{background:var(--panel);border-radius:32px;padding:clamp(1.25rem,3.5vw,2.5rem);margin-top:clamp(.75rem,2vw,1.25rem)}
-.ph1{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem 2rem;flex-wrap:wrap;margin-bottom:1.5rem}
-.proj h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1}
-.proj h2::before{content:"";display:inline-block;width:.55em;height:.55em;border-radius:50%;background:var(--sec);margin-right:.35em;vertical-align:.02em}
-.sum{margin:.6rem 0 0;color:var(--mut);max-width:54ch}
-.note{margin:.4rem 0 0;font-size:.95rem;font-weight:600}
-.gl{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin:1.75rem 0 .75rem}
-.gl h3{font-size:1.3rem;letter-spacing:-.02em}
-.g{display:grid;align-items:start;grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--min,240px)),1fr));gap:clamp(.5rem,1.4vw,.9rem)}
-.t{aspect-ratio:var(--r,4/3);border-radius:16px;overflow:hidden;background:var(--tile);margin:0}
-.t img,.t video{width:100%;height:100%;object-fit:cover;display:block}
-.t.nat{aspect-ratio:auto;background:none}.t.nat img,.t.nat video{height:auto}
-.zoom{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
-.ph{display:grid;place-items:center;text-align:center;padding:.75rem;font-weight:600;color:var(--mut);background:color-mix(in srgb,var(--sec) 16%,var(--tile))}
-.next{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:clamp(.75rem,2vw,1.25rem);padding:clamp(1.25rem,3vw,2rem) clamp(1.25rem,3.5vw,2.5rem);border-radius:32px;background:var(--sec);color:var(--secfg);text-decoration:none;transition:transform .25s}
-.next:hover{transform:translateY(-4px)}
-.next .name{font-size:clamp(1.8rem,5vw,3.2rem)}
-.next small{display:block;font:600 1rem var(--body);letter-spacing:0;opacity:.8}
-footer{padding:3rem 0 3.5rem}footer p{margin:0 0 .4rem;color:var(--mut)}
-footer a{font:800 clamp(1.6rem,5vw,3.4rem)/1.05 var(--display);letter-spacing:-.03em;text-decoration:none;border-bottom:3px solid var(--fg);overflow-wrap:anywhere}
-.edit{background:var(--fg);color:var(--bg);padding:.6rem 1rem;border-radius:14px;margin:0 0 .75rem;font-size:.95rem}
-.add{display:inline-block;font:600 .9rem var(--body);padding:.35rem .9rem;border-radius:999px;border:1.5px dashed var(--fg);cursor:pointer}
-.add input{position:absolute;opacity:0;width:1px;height:1px}
-.add:focus-within{outline:3px solid var(--fg);outline-offset:3px}
-dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh;overflow:visible}
-dialog::backdrop{background:rgba(10,8,18,.88)}
-dialog img{max-width:96vw;max-height:90vh;display:block;border-radius:12px}
-dialog button{position:absolute;top:-2.6rem;right:0;font:600 1rem var(--body);padding:.4rem .9rem;border:0;border-radius:999px;background:var(--panel);color:var(--fg);cursor:pointer}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Design portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&family=Instrument+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #EEEDF6;
+      --panel: #fff;
+      --fg: #17151F;
+      --mut: #5F5C6E;
+      --line: rgba(23, 21, 31, .14);
+      --tile: #E4E2F0;
+      --display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+      --body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #100E17;
+        --panel: #1B1826;
+        --fg: #EEEDF6;
+        --mut: #A29FB4;
+        --line: rgba(238, 237, 246, .16);
+        --tile: #2A2638;
+        color-scheme: dark
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #100E17;
+      --panel: #1B1826;
+      --fg: #EEEDF6;
+      --mut: #A29FB4;
+      --line: rgba(238, 237, 246, .16);
+      --tile: #2A2638;
+      color-scheme: dark
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 400 1.0625rem/1.55 var(--body)
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto;
+      height: env(safe-area-inset-top, 0px);
+      background: var(--bg);
+      z-index: 10
+    }
+
+    a {
+      color: inherit
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--fg);
+      outline-offset: 3px
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 3.5vw, 2.5rem)
+    }
+
+    .bar {
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      z-index: 5;
+      background: var(--bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .75rem 1.5rem;
+      padding: 1rem 0
+    }
+
+    .logo {
+      font: 800 1.25rem var(--display);
+      letter-spacing: -.03em;
+      text-decoration: none
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem
+    }
+
+    .pills a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .95rem;
+      padding: .4rem .95rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      transition: background .2s, color .2s
+    }
+
+    .pills a:hover {
+      background: var(--fg);
+      color: var(--bg)
+    }
+
+    .pills a[aria-current] {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg)
+    }
+
+    h1,
+    h2,
+    h3,
+    .name {
+      font-family: var(--display);
+      font-weight: 800;
+      letter-spacing: -.035em;
+      margin: 0
+    }
+
+    .hero {
+      font-size: clamp(2.5rem, 7.5vw, 6rem);
+      line-height: .98;
+      max-width: 15ch;
+      margin: clamp(2rem, 6vw, 4.5rem) 0 clamp(2rem, 5vw, 3.5rem)
+    }
+
+    .hero span {
+      color: var(--mut)
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(.75rem, 2vw, 1.25rem)
+    }
+
+    .card {
+      grid-column: span 6;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-height: 360px;
+      padding: clamp(1.25rem, 3vw, 2rem);
+      border-radius: 32px;
+      background: var(--sec);
+      color: var(--secfg);
+      text-decoration: none;
+      transition: transform .25s
+    }
+
+    .card:nth-child(1),
+    .card:nth-child(4) {
+      grid-column: span 7
+    }
+
+    .card:nth-child(2),
+    .card:nth-child(3) {
+      grid-column: span 5
+    }
+
+    .card:hover {
+      transform: translateY(-5px)
+    }
+
+    .card .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem
+    }
+
+    .card .name {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: .95
+    }
+
+    .go {
+      flex: none;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      display: grid;
+      place-items: center;
+      transition: transform .25s, background .2s, color .2s
+    }
+
+    .card:hover .go,
+    .card:focus-visible .go {
+      transform: rotate(45deg);
+      background: var(--secfg);
+      color: var(--sec)
+    }
+
+    .card p {
+      margin: 0;
+      max-width: 34ch;
+      opacity: .85
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem
+    }
+
+    .chips span {
+      font-size: .9rem;
+      font-weight: 600;
+      padding: .25rem .75rem;
+      border-radius: 999px;
+      border: 1.5px solid currentColor
+    }
+
+    .prev {
+      display: flex;
+      gap: .6rem;
+      margin-top: auto
+    }
+
+    .prev>* {
+      flex: 1;
+      aspect-ratio: 1/1;
+      max-width: 110px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: color-mix(in srgb, currentColor 18%, transparent)
+    }
+
+    .prev>:nth-child(2) {
+      border-radius: 999px
+    }
+
+    .prev>:nth-child(3) {
+      border-radius: 18px 18px 999px 18px
+    }
+
+    .prev img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    @media (max-width:820px) {
+
+      .card,
+      .card:nth-child(n) {
+        grid-column: span 12;
+        min-height: 300px
+      }
+    }
+
+    .banner {
+      background: var(--sec);
+      color: var(--secfg);
+      border-radius: 36px;
+      padding: clamp(1.5rem, 5vw, 3.5rem);
+      margin: .5rem 0 1.25rem
+    }
+
+    .banner h1 {
+      font-size: clamp(3rem, 11vw, 8.5rem);
+      line-height: .9
+    }
+
+    .banner p {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      max-width: 46ch;
+      margin: 1.25rem 0 0
+    }
+
+    .proj {
+      background: var(--panel);
+      border-radius: 32px;
+      padding: clamp(1.25rem, 3.5vw, 2.5rem);
+      margin-top: clamp(.75rem, 2vw, 1.25rem)
+    }
+
+    .ph1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: .75rem 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem
+    }
+
+    .proj h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1
+    }
+
+    .proj h2::before {
+      content: "";
+      display: inline-block;
+      width: .55em;
+      height: .55em;
+      border-radius: 50%;
+      background: var(--sec);
+      margin-right: .35em;
+      vertical-align: .02em
+    }
+
+    .sum {
+      margin: .6rem 0 0;
+      color: var(--mut);
+      max-width: 54ch
+    }
+
+    .note {
+      margin: .4rem 0 0;
+      font-size: .95rem;
+      font-weight: 600
+    }
+
+    .gl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.75rem 0 .75rem
+    }
+
+    .gl h3 {
+      font-size: 1.3rem;
+      letter-spacing: -.02em
+    }
+
+    .g {
+      display: grid;
+      align-items: start;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--min, 240px)), 1fr));
+      gap: clamp(.5rem, 1.4vw, .9rem)
+    }
+
+    .t {
+      aspect-ratio: var(--r, 4/3);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--tile);
+      margin: 0
+    }
+
+    .t img,
+    .t video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .t.nat {
+      aspect-ratio: auto;
+      background: none
+    }
+
+    .t.nat img,
+    .t.nat video {
+      height: auto
+    }
+
+    .zoom {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: zoom-in
+    }
+
+    .ph {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: .75rem;
+      font-weight: 600;
+      color: var(--mut);
+      background: color-mix(in srgb, var(--sec) 16%, var(--tile))
+    }
+
+    .next {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: clamp(.75rem, 2vw, 1.25rem);
+      padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 3.5vw, 2.5rem);
+      border-radius: 32px;
+      background: var(--sec);
+      color: var(--secfg);
+      text-decoration: none;
+      transition: transform .25s
+    }
+
+    .next:hover {
+      transform: translateY(-4px)
+    }
+
+    .next .name {
+      font-size: clamp(1.8rem, 5vw, 3.2rem)
+    }
+
+    .next small {
+      display: block;
+      font: 600 1rem var(--body);
+      letter-spacing: 0;
+      opacity: .8
+    }
+
+    footer {
+      padding: 3rem 0 3.5rem
+    }
+
+    footer p {
+      margin: 0 0 .4rem;
+      color: var(--mut)
+    }
+
+    footer a {
+      font: 800 clamp(1.6rem, 5vw, 3.4rem)/1.05 var(--display);
+      letter-spacing: -.03em;
+      text-decoration: none;
+      border-bottom: 3px solid var(--fg);
+      overflow-wrap: anywhere
+    }
+
+    .edit {
+      background: var(--fg);
+      color: var(--bg);
+      padding: .6rem 1rem;
+      border-radius: 14px;
+      margin: 0 0 .75rem;
+      font-size: .95rem
+    }
+
+    .add {
+      display: inline-block;
+      font: 600 .9rem var(--body);
+      padding: .35rem .9rem;
+      border-radius: 999px;
+      border: 1.5px dashed var(--fg);
+      cursor: pointer
+    }
+
+    .add input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px
+    }
+
+    .add:focus-within {
+      outline: 3px solid var(--fg);
+      outline-offset: 3px
+    }
+
+    dialog {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      max-width: 96vw;
+      max-height: 94vh;
+      overflow: visible
+    }
+
+    dialog::backdrop {
+      background: rgba(10, 8, 18, .88)
+    }
+
+    dialog img {
+      max-width: 96vw;
+      max-height: 90vh;
+      display: block;
+      border-radius: 12px
+    }
+
+    dialog button {
+      position: absolute;
+      top: -2.6rem;
+      right: 0;
+      font: 600 1rem var(--body);
+      padding: .4rem .9rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--fg);
+      cursor: pointer
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        transition: none !important
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="wrap">
-  <header class="bar"><a class="logo" href="#">Devika Santosh</a><nav class="pills" id="pills" aria-label="Sections"></nav></header>
-  <main id="app"></main>
-  <footer><p>Have a project in mind?</p><a href="mailto:devikasantosh@gmail.com">devikasantosh@gmail.com</a></footer>
-</div>
-<dialog id="lb" aria-label="Enlarged image"><button type="button">Close</button><img alt=""></dialog>
+  <div class="wrap">
+    <header class="bar"><a class="logo" href="#">Devika Santosh</a>
+      <nav class="pills" id="pills" aria-label="Sections"></nav>
+    </header>
+    <main id="app"></main>
+    <footer>
+      <p>Have a project in mind?</p><a href="mailto:devikasantosh@gmail.com">devikasantosh@gmail.com</a>
+    </footer>
+  </div>
+  <dialog id="lb" aria-label="Enlarged image"><button type="button">Close</button><img alt=""></dialog>
 
-<script>
-/* ===============================================================
-   EDIT HERE. Every page is built from SECTIONS.
+  <script>
+    /* ===============================================================
+       EDIT HERE. Every page is built from SECTIONS.
+    
+       A project shows ALL of its images in one neat grid, every image
+       cropped to the same shape. Per project (or per group inside it):
+         ratio   shape of every image: '1/1', '4/5', '9/16', '16/9', '3/1'...
+         min     smallest image width in px (smaller = more per row)
+         images  list of images (leave empty to show placeholders)
+         slots   placeholder labels, e.g. ['Logo','Colours'], or n: how many
+         groups  split one project into labelled grids (see Story templates)
+       Add a project by copying one block into a section's projects list.
+       Press E on the live site to preview your own images (not saved).
+       =============================================================== */
+    var SECTIONS = [
+      {
+        id: 'branding', title: 'Branding', color: '#4B3BFF', fg: '#fff', meta: 'Logos, type, colour and where they live',
+        lede: 'Identities built from the logo outward: type, colour, and how they hold up on a website or a poster.',
+        projects: [
+          {
+            title: 'Little Owl', summary: 'A full visual identity, from the logo to website mockups, shown in use on a poster.', note: 'The poster was designed by someone else and is shown for context.',
+            natural: true, ratio: '16/9', min: 1000, slots: ['Wide image, 16:9'], images: ['Assets/Branding/LittleOwl.png']
+          },
+          {title: 'Encore', summary: 'A logo and a set of posters.', natural: true, ratio: '16/9', min: 1000, slots: ['Wide image, 16:9'], images: ['Assets/Branding/Encore.png']},
+          {
+            title: 'Mask of the Red Death', summary: 'A logo, an animated version of it, and a team logo.', note: 'The animated logo also appears in Motion.',
+            natural: true, ratio: '1/1', min: 280, slots: ['Team logo', 'Logo', 'Animated logo (video)'], images: ['Assets/Branding/TeamLogo.png', 'Assets/Branding/Logo.png', 'Assets/Branding/MaskMotion.gif']
+          }
+        ]
+      },
+      {
+        id: 'social', title: 'Social media', color: '#FF7AB8', fg: '#17151F', meta: 'Posts and templates that teams can reuse',
+        lede: 'One theme, carried across every format. Each event gets its own set of posts, stories, banners, posters and badges that look like they belong together.',
+        projects: [
 
-   A project shows ALL of its images in one neat grid, every image
-   cropped to the same shape. Per project (or per group inside it):
-     ratio   shape of every image: '1/1', '4/5', '9/16', '16/9', '3/1'...
-     min     smallest image width in px (smaller = more per row)
-     images  list of images (leave empty to show placeholders)
-     slots   placeholder labels, e.g. ['Logo','Colours'], or n: how many
-     groups  split one project into labelled grids (see Story templates)
-   Add a project by copying one block into a section's projects list.
-   Press E on the live site to preview your own images (not saved).
-   =============================================================== */
-var SECTIONS=[
- {id:'branding',title:'Branding',color:'#4B3BFF',fg:'#fff',meta:'Logos, type, colour and where they live',
-  lede:'Identities built from the logo outward: type, colour, and how they hold up on a website or a poster.',
-  projects:[
-   {title:'Little Owl',summary:'A full visual identity, from the logo to website mockups, shown in use on a poster.',note:'The poster was designed by someone else and is shown for context.',
-    natural:true,ratio:'16/9',min:1000,slots:['Wide image, 16:9'],images:['Assets/Branding/LittleOwl.png']},
-   {title:'Encore',summary:'A logo and a set of posters.',natural:true,ratio:'16/9',min:1000,slots:['Wide image, 16:9'],images:['Assets/Branding/Encore.png']},
-   {title:'Mask of the Red Death',summary:'A logo, an animated version of it, and a team logo.',note:'The animated logo also appears in Motion.',
-    natural:true,ratio:'1/1',min:280,slots:['Team logo','Logo','Animated logo (video)'],images:['Assets/Branding/TeamLogo.png', 'Assets/Branding/Logo.png', 'Assets/Branding/MaskMotion.gif']}
-  ]},
- {id:'social',title:'Social media',color:'#FF7AB8',fg:'#17151F',meta:'Posts and templates that teams can reuse',
-  lede:'One theme, carried across every format. Each event gets its own set of posts, stories, banners, posters and badges that look like they belong together.',
-  projects:[
-   {title:'Event name one',summary:'A themed campaign: one look across every piece the event needed.',
-    groups:[{label:'Posts',ratio:'4/5',min:190,n:4,images:[]},{label:'Stories',ratio:'9/16',min:150,n:4,images:[]},{label:'Banners',ratio:'3/1',min:340,n:2,images:[]},{label:'Posters',ratio:'3/4',min:200,n:3,images:[]},{label:'Badges',ratio:'1/1',min:130,n:4,images:[]}]},
-   {title:'Event name two',summary:'A themed campaign: one look across every piece the event needed.',
-    groups:[{label:'Posts',ratio:'4/5',min:190,n:4,images:[]},{label:'Stories',ratio:'9/16',min:150,n:4,images:[]},{label:'Banners',ratio:'3/1',min:340,n:2,images:[]},{label:'Posters',ratio:'3/4',min:200,n:3,images:[]},{label:'Badges',ratio:'1/1',min:130,n:4,images:[]}]},
-   {title:'Event name three',summary:'A themed campaign: one look across every piece the event needed.',
-    groups:[{label:'Posts',ratio:'4/5',min:190,n:4,images:[]},{label:'Stories',ratio:'9/16',min:150,n:4,images:[]},{label:'Banners',ratio:'3/1',min:340,n:2,images:[]},{label:'Posters',ratio:'3/4',min:200,n:3,images:[]},{label:'Badges',ratio:'1/1',min:130,n:4,images:[]}]}
-  ]},
- {id:'ui',title:'UI',color:'#C4F24C',fg:'#17151F',meta:'Apps, websites and game interfaces',
-  lede:'Interfaces for screens of different sizes and moods.',
-  projects:[
-   {title:'Mobile music app',summary:'A music app for phones.',ratio:'9/19',min:150,n:5,images:[]},
-   {title:'Event website',summary:'A website for an event.',ratio:'16/10',min:300,n:4,images:[]},
-   {title:'Game UI',summary:'Interface design for a game.',ratio:'16/9',min:300,n:4,images:[]}
-  ]},
- {id:'motion',title:'Motion',color:'#FFB347',fg:'#17151F',meta:'Animated logos and interface motion',
-  lede:'Movement that explains a brand or an interface. Clips play on a loop.',
-  projects:[
-   {title:'Mask of the Red Death motion logo',summary:'The animated logo for the Mask of the Red Death identity.',ratio:'16/9',min:340,n:2,images:[]},
-   {title:'UI motions',summary:'Transitions and micro-interactions for interfaces.',ratio:'4/3',min:260,n:4,images:[]}
-  ]}
-];
+          {
+            title: 'Event name two', summary: 'A themed campaign: one look across every piece the event needed.',
+            groups: [{label: 'Posts', natural: true, ratio: '16/9', min: 1000, n: 1, images: ['Assets/SocialMedia/hacknight posts.png']}, {label: 'Banners', natural: true, ratio: '3/1', min: 420, n: 2, images: ['Assets/SocialMedia/banner_8x5.png', 'Assets/SocialMedia/banner.png']}]
+          },
+          {
+            title: 'Event name three', summary: 'A themed campaign: one look across every piece the event needed.',
 
-var app=document.getElementById('app'),lb=document.getElementById('lb'),pills=document.getElementById('pills'),GROUPS=[],editing=false;
-var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function plural(n){return n+(n===1?' project':' projects')}
-SECTIONS.forEach(function(s){s.projects.forEach(function(p){
-  p._g=(p.groups||[p]).map(function(g){var o={label:p.groups?(g.label||''):'',images:g.images||[],slots:g.slots,n:g.n||p.n||4,ratio:g.ratio||p.ratio||'4/3',min:g.min||p.min||240,natural:g.natural||p.natural};o.id=GROUPS.push(o)-1;return o});
-})});
-function isVid(s){return /^data:video|\.(mp4|webm)(\?|$)|^blob:.*#v$/i.test(s)}
-function tile(src,alt,nat){
-  if(nat&&!isVid(src))return '<figure class="t nat"><img src="'+esc(src)+'" alt="'+esc(alt)+'"></figure>';
-  if(isVid(src))return '<figure class="t'+(nat?' nat':'')+'"><video src="'+esc(src)+'" muted loop playsinline '+(calm?'controls':'autoplay')+' aria-label="'+esc(alt)+'"></video></figure>';
-  return '<figure class="t"><button class="zoom" type="button" data-src="'+esc(src)+'" data-alt="'+esc(alt)+'" aria-label="Enlarge: '+esc(alt)+'"><img src="'+esc(src)+'" alt="'+esc(alt)+'"></button></figure>';
-}
-function group(g,p){
-  var tiles=g.images.length?g.images.map(function(src){return tile(src,p.title+(g.label?', '+g.label:''),g.natural)}).join(''):
-    (g.slots||Array(g.n).fill('')).map(function(l){return '<figure class="t ph">'+(l?esc(l):'Image')+'</figure>'}).join('');
-  return ((g.label||editing)?'<div class="gl"><h3>'+esc(g.label)+'</h3>'+(editing?'<label class="add">Add images<input type="file" accept="image/*,video/*" multiple data-g="'+g.id+'"></label>':'')+'</div>':'')+
-    '<div class="g" style="--r:'+esc(g.ratio)+';--min:'+g.min+'px">'+tiles+'</div>';
-}
-function setPills(id){pills.innerHTML=SECTIONS.map(function(s){return '<a href="#'+s.id+'"'+(s.id===id?' aria-current="page"':'')+'>'+esc(s.title)+'</a>'}).join('')}
-function vars(s){return '--sec:'+s.color+';--secfg:'+s.fg}
-function previews(s){
-  var im=[];s.projects.forEach(function(p){p._g.forEach(function(g){g.images.forEach(function(x){if(!isVid(x))im.push(x)})})});
-  return '<div class="prev" aria-hidden="true">'+[0,1,2].map(function(i){return '<div>'+(im[i]?'<img src="'+esc(im[i])+'" alt="">':'')+'</div>'}).join('')+'</div>';
-}
-function home(){
-  document.title='Design portfolio';setPills('');
-  app.innerHTML='<h1 class="hero">Hi! I\'m Devika. <span>Choose a discipline to browse selected work.</span></h1><div class="bento">'+
-   SECTIONS.map(function(s){return '<a class="card" style="'+vars(s)+'" href="#'+s.id+'"><div class="top"><span class="name">'+esc(s.title)+'</span><span class="go"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><p>'+esc(s.meta)+'</p><div class="chips">'+s.projects.map(function(p){return '<span>'+esc(p.title)+'</span>'}).join('')+'</div>'+previews(s)+'</a>'}).join('')+'</div>';
-}
-function section(s,i){
-  var n=SECTIONS[(i+1)%SECTIONS.length];
-  document.title=s.title+' | Design portfolio';setPills(s.id);
-  app.innerHTML='<div style="'+vars(s)+'">'+(editing?'<div class="edit">Preview mode: images you add here stay on this page until you refresh. Send them to Claude to publish them. Press E to leave.</div>':'')+
-   '<div class="banner"><h1>'+esc(s.title)+'</h1><p>'+esc(s.lede)+'</p></div>'+
-   s.projects.map(function(p){return '<section class="proj"><div class="ph1"><div><h2>'+esc(p.title)+'</h2><p class="sum">'+esc(p.summary)+'</p>'+(p.note?'<p class="note">'+esc(p.note)+'</p>':'')+'</div></div>'+p._g.map(function(g){return group(g,p)}).join('')+'</section>'}).join('')+
-   '</div><a class="next" style="--sec:'+n.color+';--secfg:'+n.fg+'" href="#'+n.id+'"><span class="name"><small>Next</small>'+esc(n.title)+'</span><span class="go"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>';
-}
-function render(keep){
-  var h=(location.hash||'').replace('#',''),i=SECTIONS.findIndex(function(s){return s.id===h}),y=window.scrollY;
-  if(i<0)home();else section(SECTIONS[i],i);
-  if(keep)window.scrollTo(0,y);else{window.scrollTo(0,0);var t=app.querySelector('h1');if(t){t.setAttribute('tabindex','-1');t.focus({preventScroll:true})}}
-}
-app.addEventListener('click',function(e){var b=e.target.closest('.zoom');if(!b)return;var im=lb.querySelector('img');im.src=b.dataset.src;im.alt=b.dataset.alt;lb.showModal()});
-app.addEventListener('change',function(e){
-  var el=e.target;if(!el.matches||!el.matches('input[type=file]'))return;var g=GROUPS[+el.dataset.g];
-  Array.prototype.forEach.call(el.files,function(f){g.images.push(URL.createObjectURL(f)+(f.type.indexOf('video')===0?'#v':''))});render(true);
-});
-lb.addEventListener('click',function(e){if(e.target!==lb.querySelector('img'))lb.close()});
-document.addEventListener('keydown',function(e){if((e.key==='e'||e.key==='E')&&!e.metaKey&&!e.ctrlKey&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){editing=!editing;render(true)}});
-window.addEventListener('hashchange',function(){render(false)});
-render(false);
-</script>
+            groups: [{label: 'Posts', natural: true, ratio: '16/9', min: 1000, n: 1, images: ['Assets/SocialMedia/envisage stories.png']}, {label: 'Banners', natural: true, ratio: '3/1', min: 340, n: 3, images: ['Assets/SocialMedia/envisage_poster3.png', 'Assets/SocialMedia/envisage_poster2.png', 'Assets/SocialMedia/envisage_poster1.png']}]
+          },
+          {
+            title: 'Event name one', summary: 'A themed campaign: one look across every piece the event needed.',
+            groups: [{label: 'Posts', natural: true, ratio: '16/9', min: 1000, n: 1, images: ['Assets/SocialMedia/hack and cheese.png']}]
+          },
+          {
+            title: 'Event name one', summary: 'A themed campaign: one look across every piece the event needed.',
+            groups: [{label: 'Posts', natural: true, ratio: '16/9', min: 1000, n: 1, images: ['Assets/SocialMedia/recruitment.png']}]
+          },
+          {
+            title: 'Event name three', summary: 'A themed campaign: one look across every piece the event needed.',
+
+            groups: [{label: 'Cover Slides', natural: true, ratio: '16/9', min: 1000, n: 1, images: ['Assets/SocialMedia/IEEE_Cover Slides.png']}, {label: 'Post Content', natural: true, ratio: '16/9', min: 1000, n: 3, images: ['Assets/SocialMedia/Posts-3.png','Assets/SocialMedia/Posts-2.png','Assets/SocialMedia/Posts-1.png']}]
+          },
+        ]
+      },
+      {
+        id: 'ui', title: 'UI', color: '#C4F24C', fg: '#17151F', meta: 'Apps, websites and game interfaces',
+        lede: 'Interfaces for screens of different sizes and moods.',
+        projects: [
+          {title: 'Mobile music app', summary: 'A music app for phones.', ratio: '9/19', min: 150, n: 5, images: []},
+          {title: 'Event website', summary: 'A website for an event.', ratio: '16/10', min: 300, n: 4, images: []},
+          {title: 'Game UI', summary: 'Interface design for a game.', ratio: '16/9', min: 300, n: 4, images: []}
+        ]
+      },
+      {
+        id: 'motion', title: 'Motion', color: '#FFB347', fg: '#17151F', meta: 'Animated logos and interface motion',
+        lede: 'Movement that explains a brand or an interface. Clips play on a loop.',
+        projects: [
+          {title: 'Mask of the Red Death motion logo', summary: 'The animated logo for the Mask of the Red Death identity.', ratio: '16/9', min: 340, n: 2, images: []},
+          {title: 'UI motions', summary: 'Transitions and micro-interactions for interfaces.', ratio: '4/3', min: 260, n: 4, images: []}
+        ]
+      }
+    ];
+
+    var app = document.getElementById('app'), lb = document.getElementById('lb'), pills = document.getElementById('pills'), GROUPS = [], editing = false;
+    var calm = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function esc(s) {return String(s).replace(/[&<>"]/g, function (c) {return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]})}
+    function plural(n) {return n + (n === 1 ? ' project' : ' projects')}
+    SECTIONS.forEach(function (s) {
+      s.projects.forEach(function (p) {
+        p._g = (p.groups || [p]).map(function (g) {var o = {label: p.groups ? (g.label || '') : '', images: g.images || [], slots: g.slots, n: g.n || p.n || 4, ratio: g.ratio || p.ratio || '4/3', min: g.min || p.min || 240, natural: g.natural || p.natural}; o.id = GROUPS.push(o) - 1; return o});
+      })
+    });
+    function isVid(s) {return /^data:video|\.(mp4|webm)(\?|$)|^blob:.*#v$/i.test(s)}
+    function tile(src, alt, nat) {
+      if (nat && !isVid(src)) return '<figure class="t nat"><img src="' + esc(src) + '" alt="' + esc(alt) + '"></figure>';
+      if (isVid(src)) return '<figure class="t' + (nat ? ' nat' : '') + '"><video src="' + esc(src) + '" muted loop playsinline ' + (calm ? 'controls' : 'autoplay') + ' aria-label="' + esc(alt) + '"></video></figure>';
+      return '<figure class="t"><button class="zoom" type="button" data-src="' + esc(src) + '" data-alt="' + esc(alt) + '" aria-label="Enlarge: ' + esc(alt) + '"><img src="' + esc(src) + '" alt="' + esc(alt) + '"></button></figure>';
+    }
+    function group(g, p) {
+      var tiles = g.images.length ? g.images.map(function (src) {return tile(src, p.title + (g.label ? ', ' + g.label : ''), g.natural)}).join('') :
+        (g.slots || Array(g.n).fill('')).map(function (l) {return '<figure class="t ph">' + (l ? esc(l) : 'Image') + '</figure>'}).join('');
+      return ((g.label || editing) ? '<div class="gl"><h3>' + esc(g.label) + '</h3>' + (editing ? '<label class="add">Add images<input type="file" accept="image/*,video/*" multiple data-g="' + g.id + '"></label>' : '') + '</div>' : '') +
+        '<div class="g" style="--r:' + esc(g.ratio) + ';--min:' + g.min + 'px">' + tiles + '</div>';
+    }
+    function setPills(id) {pills.innerHTML = SECTIONS.map(function (s) {return '<a href="#' + s.id + '"' + (s.id === id ? ' aria-current="page"' : '') + '>' + esc(s.title) + '</a>'}).join('')}
+    function vars(s) {return '--sec:' + s.color + ';--secfg:' + s.fg}
+    function previews(s) {
+      var im = []; s.projects.forEach(function (p) {p._g.forEach(function (g) {g.images.forEach(function (x) {if (!isVid(x)) im.push(x)})})});
+      return '<div class="prev" aria-hidden="true">' + [0, 1, 2].map(function (i) {return '<div>' + (im[i] ? '<img src="' + esc(im[i]) + '" alt="">' : '') + '</div>'}).join('') + '</div>';
+    }
+    function home() {
+      document.title = 'Design portfolio'; setPills('');
+      app.innerHTML = '<h1 class="hero">Hi! I\'m Devika. <span>Choose a discipline to browse selected work.</span></h1><div class="bento">' +
+        SECTIONS.map(function (s) {return '<a class="card" style="' + vars(s) + '" href="#' + s.id + '"><div class="top"><span class="name">' + esc(s.title) + '</span><span class="go"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><p>' + esc(s.meta) + '</p><div class="chips">' + s.projects.map(function (p) {return '<span>' + esc(p.title) + '</span>'}).join('') + '</div>' + previews(s) + '</a>'}).join('') + '</div>';
+    }
+    function section(s, i) {
+      var n = SECTIONS[(i + 1) % SECTIONS.length];
+      document.title = s.title + ' | Design portfolio'; setPills(s.id);
+      app.innerHTML = '<div style="' + vars(s) + '">' + (editing ? '<div class="edit">Preview mode: images you add here stay on this page until you refresh. Send them to Claude to publish them. Press E to leave.</div>' : '') +
+        '<div class="banner"><h1>' + esc(s.title) + '</h1><p>' + esc(s.lede) + '</p></div>' +
+        s.projects.map(function (p) {return '<section class="proj"><div class="ph1"><div><h2>' + esc(p.title) + '</h2><p class="sum">' + esc(p.summary) + '</p>' + (p.note ? '<p class="note">' + esc(p.note) + '</p>' : '') + '</div></div>' + p._g.map(function (g) {return group(g, p)}).join('') + '</section>'}).join('') +
+        '</div><a class="next" style="--sec:' + n.color + ';--secfg:' + n.fg + '" href="#' + n.id + '"><span class="name"><small>Next</small>' + esc(n.title) + '</span><span class="go"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>';
+    }
+    function render(keep) {
+      var h = (location.hash || '').replace('#', ''), i = SECTIONS.findIndex(function (s) {return s.id === h}), y = window.scrollY;
+      if (i < 0) home(); else section(SECTIONS[i], i);
+      if (keep) window.scrollTo(0, y); else {window.scrollTo(0, 0); var t = app.querySelector('h1'); if (t) {t.setAttribute('tabindex', '-1'); t.focus({preventScroll: true})} }
+    }
+    app.addEventListener('click', function (e) {var b = e.target.closest('.zoom'); if (!b) return; var im = lb.querySelector('img'); im.src = b.dataset.src; im.alt = b.dataset.alt; lb.showModal()});
+    app.addEventListener('change', function (e) {
+      var el = e.target; if (!el.matches || !el.matches('input[type=file]')) return; var g = GROUPS[+el.dataset.g];
+      Array.prototype.forEach.call(el.files, function (f) {g.images.push(URL.createObjectURL(f) + (f.type.indexOf('video') === 0 ? '#v' : ''))}); render(true);
+    });
+    lb.addEventListener('click', function (e) {if (e.target !== lb.querySelector('img')) lb.close()});
+    document.addEventListener('keydown', function (e) {if ((e.key === 'e' || e.key === 'E') && !e.metaKey && !e.ctrlKey && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) {editing = !editing; render(true)} });
+    window.addEventListener('hashchange', function () {render(false)});
+    render(false);
+  </script>
 </body>
+
 </html>
