@@ -554,7 +554,7 @@
        =============================================================== */
     var SECTIONS = [
       {
-        id: 'branding', title: 'Branding', color: '#4B3BFF', fg: '#fff', meta: 'Logos, type, colour and where they live',
+        id: 'branding', title: 'Branding', color: '#4B3BFF', fg: '#fff', meta: 'Logos, type, colour and where they live', covers: ['Assets/Branding/LittleOwl.png', 'Assets/Branding/Encore.png', 'Assets/Branding/Logo.png'],
         lede: 'Identities built from the logo outward: type, colour, and how they hold up on a website or a poster.',
         projects: [
           {
@@ -569,7 +569,7 @@
         ]
       },
       {
-        id: 'social', title: 'Social media', color: '#FF7AB8', fg: '#17151F', meta: 'Posts and templates that teams can reuse',
+        id: 'social', title: 'Social media', color: '#FF7AB8', fg: '#17151F', meta: 'Posts and templates that teams can reuse', covers: ['Assets/SocialMedia/th1.png','Assets/SocialMedia/IEEEcover.png','Assets/SocialMedia/HCcover.png'],
         lede: 'One theme, carried across every format. Each event gets its own set of posts, stories, banners, posters and badges that look like they belong together.',
         projects: [
 {
@@ -595,7 +595,7 @@
         ]
       },
       {
-        id: 'ui', title: 'UI', color: '#C4F24C', fg: '#17151F', meta: 'Apps, websites and game interfaces',
+        id: 'ui', title: 'UI', color: '#C4F24C', fg: '#17151F', meta: 'Apps, websites and game interfaces', covers: ['Assets/UI/Home.png', 'Assets/UI/web1.png', 'Assets/UI/Programming UI.png'],
         lede: 'Interfaces for screens of different sizes and moods.',
         projects: [
           {title: 'Mobile music app', summary: 'A music app for phones.', ratio: '9/19', min: 150, n: 6, images: ['Assets/UI/Welcome.png','Assets/UI/Home.png','Assets/UI/Search Page.png','Assets/UI/Music.png','Assets/UI/Playlists.png','Assets/UI/Profile.png']},
@@ -604,7 +604,7 @@
         ]
       },
       {
-        id: 'motion', title: 'Motion', color: '#FFB347', fg: '#17151F', meta: 'Animated logos and interface motion',
+        id: 'motion', title: 'Motion', color: '#FFB347', fg: '#17151F', meta: 'Animated logos and interface motion', covers: ['Assets/Branding/MaskMotion.gif'],
         lede: 'Movement that explains a brand or an interface. Clips play on a loop.',
         projects: [
           {title: 'Mask of the Red Death motion logo', summary: 'The animated logo for the Mask of the Red Death identity.', ratio: '16/9', min: 340, n: 2, images: ['Assets/Branding/Logo.png', 'Assets/Branding/MaskMotion.gif']},
@@ -636,7 +636,7 @@ if (nat && !isVid(src)) return '<figure class="t nat"><button class="zoom" type=
     function setPills(id) {pills.innerHTML = SECTIONS.map(function (s) {return '<a href="#' + s.id + '"' + (s.id === id ? ' aria-current="page"' : '') + '>' + esc(s.title) + '</a>'}).join('')}
     function vars(s) {return '--sec:' + s.color + ';--secfg:' + s.fg}
     function previews(s) {
-      var im = []; s.projects.forEach(function (p) {p._g.forEach(function (g) {g.images.forEach(function (x) {if (!isVid(x)) im.push(x)})})});
+      var im = (s.covers || []).filter(function (x) {return !isVid(x)});
       return '<div class="prev" aria-hidden="true">' + [0, 1, 2].map(function (i) {return '<div>' + (im[i] ? '<img src="' + esc(im[i]) + '" alt="">' : '') + '</div>'}).join('') + '</div>';
     }
     function home() {
